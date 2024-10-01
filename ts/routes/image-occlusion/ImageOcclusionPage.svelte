@@ -11,6 +11,7 @@ License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
     import MasksEditor from "./MaskEditor.svelte";
     import Notes from "./Notes.svelte";
     import { textEditingState } from "./store";
+    import getContext from "svelte";
 
     export let mode: IOMode;
 
@@ -24,10 +25,13 @@ License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
         textEditingState.set(tabValue === 2);
         activeTabValue = tabValue;
     };
+
+	const direction = getContext<Readable<"ltr" | "rtl">>(directionKey);
+
 </script>
 
 <Container class="image-occlusion">
-    <div class="tab-buttons">
+    <div class="tab-buttons" dir={$direction}>
         {#each items as item}
             <button
                 class="tab-item {activeTabValue === item.value ? 'active' : ''} 
@@ -55,10 +59,18 @@ License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
         top: 2px;
         left: 2px;
     }
+
+    :global([dir="rtl"] .tab-buttons) {
+        left: unset;
+        right: 2;
+    }
+
     .tab-buttons .active {
         background: var(--button-primary-bg);
         color: white;
     }
+
+
 
     .tab-item {
         justify-content: center;

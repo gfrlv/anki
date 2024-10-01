@@ -458,7 +458,7 @@ License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
     :global([dir="rtl"] .top-tool-bar-container) {
         margin-left: unset;
-        margin-right: 28px;
+        margin-right: 106px;
     }
 
     .undo-redo-button {
